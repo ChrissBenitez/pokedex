@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tab 1</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <form action="#" onsubmit="searchPokemon(event);">
+      <input id="pokemon-search" type="text" placeholder="Search.." name="search" />
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="card-color" class="pokemon-card">
+      <div class="card-top">
+        <div class="card-top-info">
+          <h2 id="pokemon-name"></h2>
+          <span id="pokemon-id"></span>
+        </div>
+        <img id="pokemon-image" src="" alt="" />
+        <div id="pokemon-species">
+          <!-- <span class="pokemon-type"></span>-->
+        </div>
+      </div>
+      <div class="card-bottom">
+        <p class="section-title">About</p>
+        <div class="card-bottom-data">
+          <div class="card-bottom-data-element">
+            <div class="card-bottom-data-element-container">
+              <img src="/img/weight.svg" alt="weight" /><span id="pokemon-weight"></span>kg
+            </div>
+            <p>Weight</p>
+          </div>
+          <div class="card-bottom-data-element">
+            <div class="card-bottom-data-element-container">
+              <img class="ruler" src="/img/ruler.svg" alt="ruler" /><span id="pokemon-height"></span>m
+            </div>
+            <p>Height</p>
+          </div>
+          <div class="card-bottom-data-element">
+            <span id="pokemon-moves"></span>
+            <p>Moves</p>
+          </div>
+        </div>
+        <div id="pokemon-description" class="card-bottom-description"></div>
+        <p class="section-title">Base stats</p>
+        <div class="card-bottom-stats">
+          <div class="card-bottom-stats-title">HP</div>
+          <div id="pokemon-hp" class="card-bottom-stats-value"></div>
+          <div class="card-bottom-stats-line">
+            <div class="card-bottom-stats-line-progress"></div>
+          </div>
+        </div>
+        <div class="card-bottom-stats">
+          <div class="card-bottom-stats-title">ATK</div>
+          <div id="pokemon-atk" class="card-bottom-stats-value"></div>
+          <div class="card-bottom-stats-line">
+            <div class="card-bottom-stats-line-progress"></div>
+          </div>
+        </div>
+        <div class="card-bottom-stats">
+          <div class="card-bottom-stats-title">DEF</div>
+          <div id="pokemon-def" class="card-bottom-stats-value"></div>
+          <div class="card-bottom-stats-line">
+            <div class="card-bottom-stats-line-progress"></div>
+          </div>
+        </div>
+        <div class="card-bottom-stats">
+          <div class="card-bottom-stats-title">SATK</div>
+          <div id="pokemon-satk" class="card-bottom-stats-value"></div>
+          <div class="card-bottom-stats-line">
+            <div class="card-bottom-stats-line-progress"></div>
+          </div>
+        </div>
+        <div class="card-bottom-stats">
+          <div class="card-bottom-stats-title">SDEF</div>
+          <div id="pokemon-sdef" class="card-bottom-stats-value"></div>
+          <div class="card-bottom-stats-line">
+            <div class="card-bottom-stats-line-progress"></div>
+          </div>
+        </div>
+        <div class="card-bottom-stats">
+          <div class="card-bottom-stats-title">SPD</div>
+          <div id="pokemon-spd" class="card-bottom-stats-value"></div>
+          <div class="card-bottom-stats-line">
+            <div class="card-bottom-stats-line-progress"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="javascript.js"></script>
+  </body>
+
+</html>
