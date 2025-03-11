@@ -33,11 +33,11 @@ Welcome to the Pokedex project! This application allows users to browse and sear
 
 ## Contributing
 
-We welcome contributions! Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
+We welcome contributions!.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## Acknowledgements
 
