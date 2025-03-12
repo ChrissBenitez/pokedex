@@ -1,5 +1,9 @@
 //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonIndex}.png
+const API = "https://pokeapi.co/api/v2/pokemon/";
 const pokemonImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
+const pokemonGrid = document.getElementById("pokemon-grid");
+let pokemonGridName;
+
 const cardColor = document.getElementById("card-color");
 const pokemonName = document.getElementById("pokemon-name");
 const pokemonId = document.getElementById("pokemon-id");
@@ -13,6 +17,9 @@ const pokemonStatsProgress = document.getElementsByClassName("card-bottom-stats-
 const pokemonStatsValue = document.getElementsByClassName("card-bottom-stats-value");
 
 
+let listLoad = 10;
+
+// Search Pokemon based on the input search
 function searchPokemon(e) {
     e.preventDefault();
     let pokemonSearch = document.getElementById("pokemon-search").value;
@@ -20,6 +27,7 @@ function searchPokemon(e) {
     return getPokemon(pokemonSearch);
 }
 
+// Gets the description in English
 function getEnglishDescription(apiDescription) {
     for (let entry of apiDescription.flavor_text_entries) {
         if (entry.language.name === "en") {
@@ -30,6 +38,7 @@ function getEnglishDescription(apiDescription) {
     return "";
 }
 
+// Get the species of the Pokemon
 function getPokemonSpecies(dataSpecies) {
     if (pokemonSpecies.childElementCount > 0) {
         pokemonSpecies.innerHTML = "";
@@ -43,7 +52,7 @@ function getPokemonSpecies(dataSpecies) {
     //Set background color based on the type
     // Get last class
     let lastClass = cardColor.className.split(' ')[cardColor.className.split(' ').length - 1];
-    //Replaces  last class by new class (type)  
+    //Replaces  last class by new class (type)
     if (cardColor.className.split(' ').length > 1) {
         cardColor.classList.remove(lastClass);
     }
@@ -51,10 +60,11 @@ function getPokemonSpecies(dataSpecies) {
 
 }
 
+// Get the stats of the Pokemon
 function getPokemonStats(stats, pokemonColor) {
     //Progress bar's color
     let color = pokemonColor[0].type.name;
-    console.log(color);
+    // console.log(color);
     for (let i = 0; i < pokemonStatsValue.length; i++) {
         pokemonStatsValue[i].innerHTML = stats[i].base_stat;
 
@@ -66,16 +76,17 @@ function getPokemonStats(stats, pokemonColor) {
 
 
         let lastClass = pokemonStatsProgress[i].className.split(' ')[pokemonStatsProgress[i].className.split(' ').length - 1];
-        //Replaces  last class by new class (type)  
+        //Replaces  last class by new class (type)
         if (pokemonStatsProgress[i].className.split(' ').length > 1) {
             pokemonStatsProgress[i].classList.remove(lastClass);
         }
 
-        //Set background color based on the type    
+        //Set background color based on the type
         pokemonStatsProgress[i].classList.add(color);
     }
 }
 
+// Get the Pokemon data - Main function
 function getPokemon(pokemon) {
     let apiDescription = "https://pokeapi.co/api/v2/pokemon-species/" + pokemon;
     let apiPokemon = "https://pokeapi.co/api/v2/pokemon/" + pokemon;
@@ -104,7 +115,7 @@ function getPokemon(pokemon) {
             //Species / Type
             getPokemonSpecies(data.types);
 
-            //Data / Moves    
+            //Data / Moves
             pokemonHeight.innerHTML = data.height / 10;
             pokemonWeight.innerHTML = data.weight / 10;
             let moves = data.moves[0].move.name + " <br> " + data.moves[1].move.name;
@@ -117,4 +128,125 @@ function getPokemon(pokemon) {
 
 }
 
-getPokemon();
+async function fetchData(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
+
+
+// (async () => {
+//     console.log('fetching data...');
+//     const pokemon = await fetchData(`${API}?limit=3`);
+//     try {
+//         console.log(pokemon.results);
+
+
+//         pokemon.results.forEach(element => {
+//             console.log(element.url);
+//             let x = fetchData(element.url);
+//             console.log(x);
+//         });
+
+//         let template = `
+//             ${pokemon.results.map(pokemon => `
+//                 <div class="pokemon-grid-item">
+//                     <div class="pokemon-grid-id">${pokemon.name}</div>
+
+//                     <div class="pokemon-grid-name">${pokemon.name}</div>
+//                 </div>
+//             `).join('')
+//             }
+//         `;
+//         pokemonGrid.innerHTML += template;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// })();
+
+
+
+
+// fetchData(`${API}?limit=3`)
+//     // fetchData(`${API}?limit=3`)
+//     // Transforms response on json
+//     //.then(response => response.json())
+//     // We do another request for just 1 produtct
+//     .then(pokemons => {
+//         console.log(pokemons);
+//         pokemonGridName = pokemons.results[0].name;
+//         return fetchData(pokemons.results[0].url);
+//     })
+//     // Transforms response on json
+//     //.then(response => response.json())
+//     .then(pokemon => {
+//         console.log(pokemon.id)
+//         console.log(pokemon.sprites.other.dream_world.front_default)
+//         console.log(pokemon);
+
+
+//         let template = `
+//             <div class="pokemon-grid-item">
+//                 <div class="pokemon-grid-id">${pokemon.id}</div>
+//                 <div class="pokemon-grid-image">
+//                 <img class="pokedex-image" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}"></div>
+//                 <div class="pokemon-grid-name">${pokemonGridName}</div>
+//             </div>
+//         `;
+//         pokemonGrid.innerHTML += template;
+//     })
+//     .catch(error => console.log(error))
+//     .finally(() => console.log("finished"))
+
+async function loadPokedex() {
+    for (let i = 1; i <= listLoad; i++) {
+        await fetchData(`${API}${i}`)
+            .then(pokemon => {
+                // console.log(pokemon.id)
+                // console.log(pokemon.sprites.other.dream_world.front_default)
+                // console.log(pokemon.name);
+
+                let template = `
+                        <div class="pokemon-grid-item">
+                            <div class="pokemon-grid-id">${pokemon.id}</div>
+                            <div class="pokemon-grid-image">
+                            <img class="pokedex-image" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}"></div>
+                            <div class="pokemon-grid-name">${pokemon.name}</div>
+                        </div>
+                    `;
+                pokemonGrid.innerHTML += template;
+            })
+
+            .then(() => {
+                showPokemon = document.getElementsByClassName("pokemon-grid-item");
+                addEvents();
+            }
+            )
+            .catch(error => console.log(error))
+            .finally(() => console.log("finished"))
+
+
+    };
+}
+loadPokedex();
+
+
+let showPokemon;
+
+
+function addEvents() {
+    for (let i = 0; i < showPokemon.length; i++) {
+        showPokemon[i].addEventListener("click", function (e) {
+            console.log("clicked");
+            console.log(e.currentTarget);
+            cardColor.style.display = "block";
+            getPokemon(showPokemon[i].children[2].innerHTML);
+
+        });
+    }
+    let goBack = document.getElementById("go-back");
+    goBack.addEventListener("click", function () {
+        cardColor.style.display = "none";
+    }
+    );
+}

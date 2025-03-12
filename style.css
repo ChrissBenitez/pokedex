@@ -1,6 +1,52 @@
 * {
   font-family: "Poppins";
 }
+
+body {
+  background-color: #dc0a2d;
+}
+
+.main-pokedex {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pokemon-grid-list {
+  background-color: #f5f5f5;
+  height: 82vh;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.pokemon-grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 12px;
+  border: solid 1px black;
+}
+
+.pokemon-grid-id {
+  text-align: right;
+  font-size: 13px;
+}
+
+.pokemon-grid-image,
+.pokemon-grid-name {
+  text-align: center;
+}
+
+img.pokedex-image {
+  width: 60px;
+}
+
 h2,
 #pokemon-id {
   margin: 0;
@@ -13,6 +59,12 @@ h2,
   background-repeat: no-repeat;
   background-position: 95% 5%;
   background-size: 60%;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 #pokemon-species {
@@ -40,7 +92,7 @@ h2,
 .card-top-info,
 .card-bottom-data {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .card-top-info {
