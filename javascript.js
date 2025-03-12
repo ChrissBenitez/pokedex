@@ -1,13 +1,14 @@
 //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonIndex}.png
 const API = "https://pokeapi.co/api/v2/pokemon/";
-const pokemonImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
+// const pokemonImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
+let pokemonImageUrl;
 const pokemonGrid = document.getElementById("pokemon-grid");
 let pokemonGridName;
+let pokemonImage = document.getElementById("pokemon-image");
 
 const cardColor = document.getElementById("card-color");
 const pokemonName = document.getElementById("pokemon-name");
 const pokemonId = document.getElementById("pokemon-id");
-const pokemonImage = document.getElementById("pokemon-image");
 const pokemonSpecies = document.getElementById("pokemon-species");
 const pokemonHeight = document.getElementById("pokemon-height");
 const pokemonWeight = document.getElementById("pokemon-weight");
@@ -110,7 +111,8 @@ function getPokemon(pokemon) {
             //Name / ID / Image
             pokemonName.innerHTML = data.name.charAt(0).toUpperCase() + data.name.slice(1);
             pokemonId.innerHTML = "#" + data.id;
-            pokemonImage.src = pokemonImageUrl + data.id + ".svg";
+            // pokemonImage.src = pokemonImageUrl + data.id + ".svg";
+            pokemonImage.src = pokemonImageUrl;
 
             //Species / Type
             getPokemonSpecies(data.types);
@@ -228,7 +230,6 @@ async function loadPokedex() {
 
     };
 }
-loadPokedex();
 
 
 let showPokemon;
@@ -238,7 +239,8 @@ function addEvents() {
     for (let i = 0; i < showPokemon.length; i++) {
         showPokemon[i].addEventListener("click", function (e) {
             console.log("clicked");
-            console.log(e.currentTarget);
+            pokemonImageUrl = e.currentTarget.children[1].children[0].src;
+            console.log(pokemonImageUrl);
             cardColor.style.display = "block";
             getPokemon(showPokemon[i].children[2].innerHTML);
 
@@ -250,3 +252,5 @@ function addEvents() {
     }
     );
 }
+
+loadPokedex();

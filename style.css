@@ -82,6 +82,7 @@ h2,
 .card-top {
   text-align: center;
   padding-top: 16px;
+  min-height: 410px;
 }
 
 #pokemon-name,
@@ -107,18 +108,19 @@ h2,
 
 #pokemon-image {
   display: block;
-  margin: 0 auto;
+  margin: 100px auto;
   margin-bottom: 32px;
   max-width: 90%;
+  min-height: 200px;
 }
 
 .card-bottom {
   background-color: white;
   border-radius: 5px;
-  width: 98%;
+  width: 95%;
   margin: -100px auto 0px auto;
   padding-top: 140px;
-  padding-bottom: 10px;
+  padding-bottom: 32px;
 }
 
 .card-bottom-data-element {
