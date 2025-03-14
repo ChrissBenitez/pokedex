@@ -6,6 +6,10 @@ const pokemonGrid = document.getElementById("pokemon-grid");
 let pokemonGridName;
 let pokemonImage = document.getElementById("pokemon-image");
 
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("input", filterPokemon);
+
+const pokemonSearched = [];
 const cardColor = document.getElementById("card-color");
 const pokemonName = document.getElementById("pokemon-name");
 const pokemonId = document.getElementById("pokemon-id");
@@ -204,6 +208,8 @@ async function loadPokedex() {
     for (let i = 1; i <= listLoad; i++) {
         await fetchData(`${API}${i}`)
             .then(pokemon => {
+                pokemonSearched.push(pokemon);
+
                 // console.log(pokemon.id)
                 // console.log(pokemon.sprites.other.dream_world.front_default)
                 // console.log(pokemon.name);
@@ -229,6 +235,7 @@ async function loadPokedex() {
 
 
     };
+    console.log(pokemonSearched);
 }
 
 
@@ -250,3 +257,19 @@ function addEvents() {
 }
 
 loadPokedex();
+
+
+
+// Filters Pokemons based on the input search
+function filterPokemon(e) {
+    const term = e.target.value.toUpperCase();
+    const pokemons = pokemonGrid.getElementsByClassName("pokemon-grid-item");
+    Array.from(pokemons).forEach((pokemon) => {
+        const title = pokemon.lastElementChild.innerHTML;
+        if (title.toUpperCase().indexOf(term) > -1) {
+            pokemon.style.display = "flex";
+        } else {
+            pokemon.style.display = "none";
+        }
+    });
+}   
