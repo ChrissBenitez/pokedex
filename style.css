@@ -4,6 +4,7 @@
 
 body {
   background-color: #dc0a2d;
+  height: 100vh;
 }
 
 .main-pokedex {
@@ -19,9 +20,12 @@ body {
   border-radius: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  padding: 16px;
+  grid-gap: 12px;
+  padding: 18px;
   overflow-y: auto;
+  -webkit-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.35);
 }
 
 .pokemon-grid-item {
@@ -71,6 +75,7 @@ h2,
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  padding-bottom: 32px;
 }
 
 #pokemon-species {
@@ -122,11 +127,15 @@ h2,
 
 .card-bottom {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 25px;
   width: 95%;
   margin: -100px auto 0px auto;
   padding-top: 140px;
   padding-bottom: 32px;
+  height: 39vh;
+  -webkit-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.35);
 }
 
 .card-bottom-data-element {
