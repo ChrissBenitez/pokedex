@@ -18,7 +18,7 @@ const pokemonStatsProgress = document.getElementsByClassName("card-bottom-stats-
 const pokemonStatsValue = document.getElementsByClassName("card-bottom-stats-value");
 
 
-let listLoad = 10;
+let listLoad = 50;
 
 // Search Pokemon based on the input search
 function searchPokemon(e) {
@@ -125,9 +125,9 @@ function getPokemon(pokemon) {
 
             //Stats
             getPokemonStats(data.stats, data.types);
+            cardColor.style.display = "block";
         })
         .catch(error => console.log(error))
-
 }
 
 async function fetchData(url) {
@@ -238,12 +238,8 @@ let showPokemon;
 function addEvents() {
     for (let i = 0; i < showPokemon.length; i++) {
         showPokemon[i].addEventListener("click", function (e) {
-            console.log("clicked");
             pokemonImageUrl = e.currentTarget.children[1].children[0].src;
-            console.log(pokemonImageUrl);
-            cardColor.style.display = "block";
             getPokemon(showPokemon[i].children[2].innerHTML);
-
         });
     }
     let goBack = document.getElementById("go-back");
